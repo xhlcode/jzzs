@@ -30,6 +30,7 @@
     int headHeigt;
     Tools *tools;
     NSMutableArray *_answerArr;
+    UIToolbar *_footToolBar;
     
     
 }
@@ -63,7 +64,7 @@
 
 -(void)initWithSub
 {
-    _scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenX, kScreenY-60)];
     // _scrollView.frame = CGRectMake(0, 0, kScreenX, kScreenY);
     
     tools = [[Tools alloc]init];
@@ -97,15 +98,40 @@
     
     //设置当前点
     // _scrollView.contentOffset = CGPointMake(0, 0);
-    
-    
-    
     //_scrollView.delaysContentTouches=NO;
+   
     
     [_scrollView addSubview:_leftTableView];
     [_scrollView addSubview:_centreTableView];
     [_scrollView addSubview:_rightTableView];
     [self.view addSubview:_scrollView];
+    
+
+    [self createToolBar];
+}
+
+
+#pragma 创建底部工具栏
+-(void)createToolBar
+{
+    UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenY-60, kScreenX, 60)];
+    barView.backgroundColor = [UIColor lightGrayColor];
+    NSArray *arr = @[@"1/10",@"查看答案",@"收藏本题"];
+    for(int i= 0; i<arr.count;i++){
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i, 0, 40, 40)];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",16+i]] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d-2",16+i]] forState:UIControlStateHighlighted];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i-10,40, 60, 20)];
+        label.text=  arr[i];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:14];
+        [barView addSubview:btn];
+        [barView addSubview:label];
+    
+    }
+    [self.view addSubview:barView];
+
+
 }
 
 // 减速停止了时执行，
@@ -291,7 +317,7 @@
     
     cell.IntroduceLabel.font = [UIFont systemFontOfSize:18];
     
-    
+    //判断题型
     if (leafLevel.mType ==1) {
         cell.IntroduceLabel.text = [[tools getAnsWerWithString:leafLevel.mQuestion]objectAtIndex:indexPath.row+1];
         //cell.in
@@ -307,6 +333,7 @@
         
     }
     
+    //判断答案对错
     int page = [self getPage:tableView andCurrentpage:_currentPage];
     if ([_answerArr[page-1] intValue] != 0) {
         if([leafLevel.mAnswer isEqualToString:[NSString stringWithFormat:@"%c",'A'+(int)indexPath.row]]){
@@ -327,6 +354,7 @@
         cell.image.hidden = YES;
         
     }
+    
     
     
     
