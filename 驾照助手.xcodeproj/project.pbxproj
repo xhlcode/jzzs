@@ -35,6 +35,7 @@
 		2CC8407B1CDC818B00447E9A /* PractiseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC840791CDC818B00447E9A /* PractiseTableViewCell.m */; };
 		2CC8407C1CDC818B00447E9A /* PractiseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC8407A1CDC818B00447E9A /* PractiseTableViewCell.xib */; };
 		2CC8407F1CDD705C00447E9A /* LeafLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8407E1CDD705C00447E9A /* LeafLevel.m */; };
+		2CFF69241CE56AA900B850BF /* StatisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF69231CE56AA900B850BF /* StatisticsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,9 @@
 		2CC8407A1CDC818B00447E9A /* PractiseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PractiseTableViewCell.xib; sourceTree = "<group>"; };
 		2CC8407D1CDD705C00447E9A /* LeafLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeafLevel.h; sourceTree = "<group>"; };
 		2CC8407E1CDD705C00447E9A /* LeafLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeafLevel.m; sourceTree = "<group>"; };
+		2CFF69211CE55D7600B850BF /* Macros.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Macros.pch; path = "../守望先锋控/Macros.pch"; sourceTree = "<group>"; };
+		2CFF69221CE56AA900B850BF /* StatisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsView.h; sourceTree = "<group>"; };
+		2CFF69231CE56AA900B850BF /* StatisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		2CA949481CD995C00084E7FB = {
 			isa = PBXGroup;
 			children = (
+				2CFF69211CE55D7600B850BF /* Macros.pch */,
 				2CC8406D1CDB75DC00447E9A /* libsqlite3.tbd */,
 				2CC840731CDC6CEA00447E9A /* data.sqlite */,
 				2CA949531CD995C00084E7FB /* 驾照助手 */,
@@ -241,6 +246,8 @@
 				2CC840781CDC818B00447E9A /* PractiseTableViewCell.h */,
 				2CC840791CDC818B00447E9A /* PractiseTableViewCell.m */,
 				2CC8407A1CDC818B00447E9A /* PractiseTableViewCell.xib */,
+				2CFF69221CE56AA900B850BF /* StatisticsView.h */,
+				2CFF69231CE56AA900B850BF /* StatisticsView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -402,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC8407B1CDC818B00447E9A /* PractiseTableViewCell.m in Sources */,
+				2CFF69241CE56AA900B850BF /* StatisticsView.m in Sources */,
 				2CA9495C1CD995C00084E7FB /* ViewController.m in Sources */,
 				2CA949931CDAE9040084E7FB /* FirstCourseTableViewCell.m in Sources */,
 				2CA949621CD995C00084E7FB /* ____.xcdatamodeld in Sources */,
@@ -499,6 +507,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -542,6 +552,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -560,6 +571,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "驾照助手/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.xhlcode.----";
@@ -572,6 +585,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "驾照助手/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.xhlcode.----";

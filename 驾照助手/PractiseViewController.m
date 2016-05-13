@@ -10,6 +10,7 @@
 #import "PractiseTableViewCell.h"
 #import "LeafLevel.h"
 #import "Tools.h"
+#import "StatisticsView.h"
 
 
 #define kScreenX [UIScreen      mainScreen].bounds.size.width //屏幕宽度
@@ -121,6 +122,9 @@
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i, 0, 40, 40)];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",16+i]] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d-2",16+i]] forState:UIControlStateHighlighted];
+        [btn setTag:100+i];
+        [btn addTarget:self action:@selector(selectorBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i-10,40, 60, 20)];
         label.text=  arr[i];
         label.textAlignment = NSTextAlignmentCenter;
@@ -130,9 +134,26 @@
     
     }
     [self.view addSubview:barView];
+}
 
+-(void)selectorBtn:(UIButton *)sender
+{
+    int tag = (int)sender.tag;
+     StatisticsView *statisticsView = [[StatisticsView alloc]init];
+    UIView *view;
+    switch (tag) {
+        case 100:
+           view = [statisticsView createStatisticsView];
+            [self.view addSubview:view];
+            break;
+            
+        default:
+            break;
+    }
 
 }
+
+
 
 // 减速停止了时执行，
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -148,6 +169,7 @@
     }
     
     _currentPage = page;
+    
     
     
     
