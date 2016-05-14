@@ -144,8 +144,15 @@
      oglFlip             上下翻转效果
      */
     animation.type = animationType;
-    animation.subtype = kCATransitionFade;
+    /*
+     kCATransitionFade 淡出
+     kCATransitionMoveIn 覆盖原图
+     kCATransitionPush 推出
+     kCATransitionReveal 底部显出来
+     */
+    animation.subtype = kCATransitionPush;
     [carsView.superview.layer addAnimation:animation forKey:@"animation"];
+  
 }
 
 

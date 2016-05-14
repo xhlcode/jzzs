@@ -10,6 +10,8 @@
 
 @interface StatisticsView : UIView
 
--(id)createStatisticsView;
+-(instancetype)initWithFrame:(CGRect)frame withSuperView:(UIView *)superView;
+
+-(void)createStatisticsView;
 
 @end

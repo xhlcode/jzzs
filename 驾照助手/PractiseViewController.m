@@ -32,6 +32,7 @@
     Tools *tools;
     NSMutableArray *_answerArr;
     UIToolbar *_footToolBar;
+    StatisticsView *_sheetView;
     
     
 }
@@ -109,6 +110,7 @@
     
 
     [self createToolBar];
+    [self createSheetView];
 }
 
 
@@ -136,17 +138,29 @@
     [self.view addSubview:barView];
 }
 
+-(void)createSheetView
+{
+    _sheetView = [[StatisticsView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-150) withSuperView:self.view];
+    [self.view addSubview:_sheetView];
+}
+
 -(void)selectorBtn:(UIButton *)sender
 {
     int tag = (int)sender.tag;
-     StatisticsView *statisticsView = [[StatisticsView alloc]init];
-    UIView *view;
+    
+    //UIView *view;
     switch (tag) {
         case 100:
-           view = [statisticsView createStatisticsView];
-            [self.view addSubview:view];
+        {
+            [UIView animateWithDuration:0.4 animations:^{
+                _sheetView.frame = CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height-150);
+                
+                
+            }];
+        }
+           //[[StatisticsView alloc]initWithFrame:self.view.frame withSuperView:self.view];
+            //[self.view addSubview:view];
             break;
-            
         default:
             break;
     }
