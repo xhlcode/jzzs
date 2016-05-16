@@ -11,6 +11,8 @@
 #import "PractiseSelectViewController.h"
 #import "fmdb/FMDB.h"
 #import "FirstLevel.h"
+#import "PractiseViewController.h"
+#import "LeafLevel.h"
 
 
 
@@ -105,20 +107,33 @@
 #pragma 行点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"practiseSelect" sender:indexPath];
+    if (indexPath.row == 0) {
+        [self performSegueWithIdentifier:@"practiseSelect" sender:indexPath];
+    }else if(indexPath.row == 1){
+        [self performSegueWithIdentifier:@"practise" sender:indexPath];
+    
+    }
+    
+    
     
 }
 
 #pragma 跳转页面
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    PractiseSelectViewController *practiseView = [segue destinationViewController];
+    PractiseSelectViewController *practiseSelectView = [segue destinationViewController];
+    
+    PractiseViewController *practiseView = [segue destinationViewController];
     
     NSIndexPath *index = sender;
     if (index.row == 0) {
-        dataArray = [self querySql:@"select * from firstlevel"];
-        [practiseView setValue:dataArray forKey:@"dataArray"];
-        [practiseView setValue:@"章节练习" forKey:@"courseTitle"];
+        dataArray = [self queryPractiseSelectSql:@"select * from firstlevel"];
+        [practiseSelectView setValue:dataArray forKey:@"dataArray"];
+        [practiseSelectView setValue:@"章节练习" forKey:@"courseTitle"];
+    }else if (index.row == 1){
+        dataArray = [self queryPractiseSql:@"select * from leafLevel"];
+        [practiseView setValue:dataArray forKey:@"practiseArray"];
+        [practiseView setValue:@"顺序练习" forKey:@"courseTitle"];
     }
     
     
@@ -126,7 +141,7 @@
 
 
 #pragma 获取数据
--(NSMutableArray *)querySql:(NSString *)sql
+-(NSMutableArray *)queryPractiseSelectSql:(NSString *)sql
 {
     
     NSMutableArray *arr = [[NSMutableArray alloc]init];
@@ -145,6 +160,41 @@
     [dataBase close];
     return arr;
 }
+
+-(NSMutableArray *)queryPractiseSql:(NSString *)sql
+{
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    if ([dataBase open]) {
+        
+        FMResultSet *rs = [dataBase executeQuery:sql];
+        
+        while([rs next]){
+            LeafLevel *leafLevel = [[LeafLevel alloc]init];
+            leafLevel.mQuestion = [rs stringForColumn:@"mquestion"];
+            leafLevel.mDesc = [rs stringForColumn:@"mdesc"];
+            leafLevel.mId = [rs intForColumn:@"mid"];
+            leafLevel.mAnswer = [rs stringForColumn:@"manswer"];
+            leafLevel.mImage = [rs stringForColumn:@"mimage"];
+            leafLevel.pId = [rs intForColumn:@"pid"];
+            leafLevel.pName = [rs stringForColumn:@"pname"];
+            leafLevel.sId = [rs intForColumn:@"sid"];
+            leafLevel.sName = [rs stringForColumn:@"sname"];
+            leafLevel.mStatus = [rs intForColumn:@"mstatus"];
+            leafLevel.mArea = [rs stringForColumn:@"marea"];
+            leafLevel.mType = [rs intForColumn:@"mtype"];
+            leafLevel.mUnknow = [rs stringForColumn:@"munknow"];
+            leafLevel.mYear = [rs intForColumn:@"myear"];
+            leafLevel.eCount = [rs intForColumn:@"ecount"];
+            [arr addObject:leafLevel];
+        }
+    }
+    [dataBase close];
+    return arr;
+
+}
+
+
+
 
 
 /*

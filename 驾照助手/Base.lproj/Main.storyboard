@@ -399,11 +399,12 @@
                     <connections>
                         <outlet property="tableView" destination="HvC-N8-GfA" id="aKL-eg-wCQ"/>
                         <segue destination="oXK-Mz-TCX" kind="push" identifier="practiseSelect" id="Kwa-tK-5dt"/>
+                        <segue destination="dc1-qu-GEB" kind="push" identifier="practise" id="59C-ro-RxA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCH-Xv-cll" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="610" y="-218"/>
+            <point key="canvasLocation" x="662" y="-228"/>
         </scene>
         <!--Practise Select View Controller-->
         <scene sceneID="DrJ-az-Ydp">
@@ -433,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXA-Bn-x8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1264" y="-228"/>
+            <point key="canvasLocation" x="1252" y="-704"/>
         </scene>
         <!--Practise View Controller-->
         <scene sceneID="Drj-tr-HdF">
@@ -466,4 +467,7 @@
         <image name="6" width="86" height="86"/>
         <image name="background" width="640" height="1136"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="59C-ro-RxA"/>
+    </inferredMetricsTieBreakers>
 </document>

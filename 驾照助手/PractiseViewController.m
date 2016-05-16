@@ -19,6 +19,7 @@
 @interface PractiseViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *practiseArray;
+@property (nonatomic, strong) NSString *courseTitle;
 @property (nonatomic, assign,readonly) int currentPage;
 @end
 
@@ -33,6 +34,8 @@
     NSMutableArray *_answerArr;
     UIToolbar *_footToolBar;
     StatisticsView *_sheetView;
+    UIButton *toolsBtn;
+    UILabel *toolsLabel;
     
     
 }
@@ -47,6 +50,8 @@
     _rightTableView.dataSource  = self;
     
     _scrollView.delegate = self;
+    
+    self.navigationItem.title = self.courseTitle;
     
     _answerArr = [[NSMutableArray alloc]init ];
     for(int i=0;i<_practiseArray.count;i++){
@@ -119,20 +124,20 @@
 {
     UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenY-60, kScreenX, 60)];
     barView.backgroundColor = [UIColor lightGrayColor];
-    NSArray *arr = @[@"1/10",@"查看答案",@"收藏本题"];
+    NSArray *arr = @[[NSString stringWithFormat:@"1/%lu",(unsigned long)self.practiseArray.count],@"查看答案",@"收藏本题"];
     for(int i= 0; i<arr.count;i++){
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i, 0, 40, 40)];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",16+i]] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d-2",16+i]] forState:UIControlStateHighlighted];
-        [btn setTag:100+i];
-        [btn addTarget:self action:@selector(selectorBtn:) forControlEvents:UIControlEventTouchUpInside];
+        toolsBtn = [[UIButton alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i, 0, 40, 40)];
+        [toolsBtn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",16+i]] forState:UIControlStateNormal];
+        [toolsBtn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d-2",16+i]] forState:UIControlStateHighlighted];
+        [toolsBtn setTag:100+i];
+        [toolsBtn addTarget:self action:@selector(selectorBtn:) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i-10,40, 60, 20)];
-        label.text=  arr[i];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:14];
-        [barView addSubview:btn];
-        [barView addSubview:label];
+        toolsLabel = [[UILabel alloc]initWithFrame:CGRectMake(((kScreenX-kScreenX/3)/4)*(i+1)+40*i-10,40, 60, 20)];
+        toolsLabel.text=  arr[i];
+        toolsLabel.textAlignment = NSTextAlignmentCenter;
+        toolsLabel.font = [UIFont systemFontOfSize:14];
+        [barView addSubview:toolsBtn];
+        [barView addSubview:toolsLabel];
     
     }
     [self.view addSubview:barView];
@@ -183,7 +188,6 @@
     }
     
     _currentPage = page;
-    
     
     
     
